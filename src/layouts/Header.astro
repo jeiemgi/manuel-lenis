@@ -1,0 +1,89 @@
+---
+import { Image } from "astro:assets";
+import lenisLogo from "../assets/lenis-logo.png";
+
+interface Props {
+  isRed?: boolean;
+}
+
+const { isRed } = Astro.props;
+---
+
+<style>
+  .header {
+    top: 108px;
+    left: 0;
+    position: fixed;
+    height: 68px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .header-logo {
+    left: 80px;
+    position: absolute;
+    display: block;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav {
+    padding: 0 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav ul {
+    gap: 10rem;
+    display: flex;
+    list-style: none;
+    padding: 0;
+  }
+
+  .nav ul li a {
+    font-style: normal;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: var(--font-size-md);
+    transition: color 0.2s ease-in-out;
+  }
+
+  .nav ul li a:hover {
+    text-decoration: underline;
+  }
+
+  .header .nav ul li a {
+    color: var(--red);
+  }
+
+  .header--red .header-logo {
+    color: var(--black);
+  }
+
+  .header--red .nav ul li a {
+    color: var(--black);
+  }
+
+  .header--red .header-logo-image {
+    filter: brightness(0);
+    transition: filter 0.2s ease-in-out;
+  }
+</style>
+
+<header class:list={["header", { "header--red": isRed }]}>
+  <a class={"header-logo"} href="/">
+    <Image src={lenisLogo} class="header-logo-image" alt="Lenis logo" />
+  </a>
+  <nav class={"nav"}>
+    <ul>
+      <li><a href="/about">About</a></li>
+      <li><a href="/reel">Reel</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>

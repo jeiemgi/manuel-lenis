@@ -1,0 +1,78 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  isRed?: boolean;
+}
+
+const { isRed } = Astro.props;
+---
+
+<style>
+  .footer {
+    bottom: 35px;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--red);
+  }
+
+  .footer {
+    color: var(--red);
+
+    a:visited {
+      color: var(--red);
+    }
+  }
+
+  .footer--red {
+    color: var(--black);
+
+    a:visited {
+      color: var(--black);
+    }
+  }
+
+  .footer-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    max-width: var(--container-max-width);
+  }
+
+  .footer-copyright {
+    display: flex;
+    align-items: end;
+    text-align: center;
+    font-size: var(--font-size-sm);
+  }
+
+  .footer-socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+</style>
+
+<footer class:list={["footer", { "footer--red": isRed }]}>
+  <div class="footer-container">
+    <div>00 <br />WELCOME</div>
+    <div class={"footer-copyright"}>
+      <p>© MANUELENIS 2024 • Site by XXXX™</p>
+    </div>
+    <div class={"footer-socials"}>
+      <a target="_blank" href="https://www.instagram.com/">
+        <Icon name="instagram" />
+      </a>
+      <a target="_blank" href="https://www.vimeo.com/">
+        <Icon name="vimeo" />
+      </a>
+      <a target="_blank" href="https://www.youtube.com/">
+        <Icon name="youtube" />
+      </a>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,39 @@
+:root {
+    --red: #c92624;
+    --black: #13151a;
+    /* Fonts */
+    --font-atkinson: 'Atkinson Hyperlegible', sans-serif;
+    --font-size-xs: 7px;
+    --font-size-sm: 9px;
+    --font-size-md: 12px;
+    --font-size-lg: 22px;
+    /* Sizes */
+    --container-max-width: 1600px;
+}
+
+html {
+    background: var(--black);
+    font-weight: 400;
+    font-family: var(--font-atkinson), sans-serif;
+}
+
+.max-container {
+    width: 100%;
+    margin: 0 auto;
+    max-width: var(--container-max-width);
+    position: relative;
+}
+
+#main-layout {
+    width: 100%;
+    height: 100vh;
+}
+
+.content {
+    display: flex;
+    height: 100vh;
+    padding-top: 10vh;
+}
+.content--red {
+    background: var(--red);
+}

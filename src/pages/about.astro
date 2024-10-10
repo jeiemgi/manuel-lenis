@@ -1,0 +1,96 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import PageWrapper from "../components/PageWrapper.astro";
+
+import about1 from "../assets/about-1.png";
+import about2 from "../assets/about-2.png";
+---
+
+<style>
+  .about-page-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+
+  .about-page-image {
+    width: 100%;
+    display: block;
+    mix-blend-mode: darken;
+    max-width: 900px;
+    height: auto;
+  }
+
+  .about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: max-content;
+    margin: 0 auto;
+  }
+
+  .about-title {
+    width: 100%;
+    margin-bottom: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: var(--font-size-md);
+  }
+
+  .about-content {
+    display: flex;
+    gap: 200px;
+
+    p {
+      font-weight: 400;
+
+      strong {
+        font-weight: 700;
+      }
+
+      margin-bottom: 2rem;
+      max-width: 365px;
+      text-align: justify;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: var(--font-size-sm);
+    }
+
+    img {
+      width: 365px;
+      height: auto;
+    }
+  }
+</style>
+
+<Layout isRed>
+  <PageWrapper>
+    <div class="about-page-image-container">
+      <Image src={about1} alt="About Manuel Lenis" class="about-page-image" />
+    </div>
+    <div class="about-container">
+      <h1 class="about-title">01 <br />ABOUT MANUELENIS</h1>
+      <div class="about-content">
+        <Image src={about2} alt="About Manuel Lenis" class="about-page-image" />
+        <div>
+          <p>
+            <strong>Manuelenis</strong> is a Colombian-born film director and photographer
+            now based in Paris, whose artistic vision is deeply rooted in his diverse
+            background in the arts, 90s films, and rock music.
+          </p>
+          <p>
+            His aesthetics are defined by a nostalgic and emotive tone, often
+            conveying powerful messages that resonate with the heart. Known for
+            his wide-ranging portfolio of music videos, Manuelenis seeks to
+            expand his creative expression into narrative forms such as
+            documentaries and short films, where he can further explore the
+            depth of human emotion and storytelling through his visual style
+          </p>
+        </div>
+      </div>
+    </div>
+  </PageWrapper>
+</Layout>
