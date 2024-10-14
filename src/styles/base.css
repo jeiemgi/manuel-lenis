@@ -41,7 +41,7 @@ html {
         @apply grid grid-cols-12 gap-5
     }
 
-    .heading-1 {
+    .heading-1, h1 {
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;

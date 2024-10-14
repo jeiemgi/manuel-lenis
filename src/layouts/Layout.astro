@@ -54,10 +54,38 @@ const { title = defaultTitle, isRed } = Astro.props;
         transform: translate(-10%, -10%);
       }
 
+      #cursor:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50px;
+        height: 50px;
+        background: var(--red);
+        transform: translate(-40%, -40%) scale(0);
+        border-radius: 100%;
+        opacity: 0.5;
+        transition: transform 0.1s ease-out;
+      }
+
+      body.content--red #cursor:before {
+        background: var(--black);
+      }
+
+      #cursor.hovering:before {
+        transform: translate(-40%, -40%) scale(1);
+        transition: transform 0.2s ease-out;
+      }
+
+      #cursor.hovering img {
+        transform: scale(0);
+      }
+
       #cursor img {
         width: 28px;
         height: 33px;
         pointer-events: none;
+        transition: transform 0.2s ease-out;
       }
 
       body.content--red #cursor img {
