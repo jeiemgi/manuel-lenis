@@ -4,8 +4,9 @@ import "@fontsource/atkinson-hyperlegible/700.css";
 import "../styles/base.css";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
-import Cursor from "./Cursor.astro";
+import { Image } from "astro:assets";
 import { ViewTransitions } from "astro:transitions";
+import cursorPNG from "../assets/cursor.png";
 
 interface Props {
   title?: string;
@@ -26,23 +27,71 @@ const { title = defaultTitle, isRed } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <ViewTransitions />
-    <style>
+    <style is:global>
+      body {
+        cursor: none !important;
+
+        a,
+        a:hover {
+          cursor: none !important;
+        }
+      }
+
+      body.content--red {
+        background: var(--red);
+      }
+
       #main-container {
         width: 100%;
         min-height: 100vh;
+        cursor: none !important;
       }
 
-      #main-container.content--red {
-        background: var(--red);
+      #cursor {
+        z-index: 999;
+        position: fixed;
+        pointer-events: none;
+        transform: translate(-10%, -10%);
+      }
+
+      #cursor img {
+        width: 28px;
+        height: 33px;
+        pointer-events: none;
+      }
+
+      body.content--red #cursor img {
+        filter: brightness(0);
       }
     </style>
   </head>
-  <body>
+  <body class:list={[{ "content--red": isRed }]}>
     <Header isRed={isRed} />
     <main id="main-container" class:list={[{ "content--red": isRed }]}>
       <slot />
     </main>
     <Footer isRed={isRed} />
-    <Cursor isRed={isRed} />
+    <div id={"cursor"}>
+      <Image src={cursorPNG} alt="cursor" />
+    </div>
+    <script>
+      import Cursor from "../scripts/Cursor";
+
+      function init() {
+        const cursor = new Cursor("#cursor");
+
+        document.addEventListener(
+          "astro:before-swap",
+          () => {
+            console.log("destroy");
+            cursor.destroy();
+          },
+          { once: true },
+        );
+      }
+
+      document.addEventListener("astro:after-swap", init);
+      init();
+    </script>
   </body>
 </html>

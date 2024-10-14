@@ -28,20 +28,54 @@
 
 html {
     background: var(--black);
-    font-weight: 400;
     font-family: var(--font-atkinson), sans-serif;
 }
 
 
 @layer base {
     .grid-container {
-        @apply grid grid-cols-12
+        @apply grid grid-cols-12 w-full gap-x-5
     }
 
-    .title-1 {
+    .grid-container {
+        @apply grid grid-cols-12 gap-5
+    }
+
+    .heading-1 {
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: var(--font-size-lg);
+    }
+
+    .heading-2 {
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
         font-size: var(--font-size-md);
     }
+
+    .heading-3, h3 {
+        letter-spacing: 0.1em;
+        font-size: var(--font-size-sm);
+    }
+
+    .text-caption {
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: var(--font-size-md);
+    }
+
+    .text-base, p {
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: var(--font-size-sm);
+
+        strong {
+            font-weight: 700;
+        }
+    }
+
+
 }
