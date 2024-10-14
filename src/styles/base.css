@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --mobile-breakpoint: 768px;
+
+    --red: #c92624;
+    --black: #13151a;
+    /* Fonts */
+    --font-atkinson: "Atkinson Hyperlegible", sans-serif;
+    --font-size-xs: 8px;
+    --font-size-sm: 12px;
+    --font-size-md: 16px;
+    --font-size-lg: 22px;
+    /* Sizes */
+    --container-max-width: 1600px;
+}
+
+@media (min-width: var(--mobile-breakpoint)) {
+    :root {
+        --font-size-xs: 10px;
+        --font-size-sm: 14px;
+        --font-size-md: 18px;
+        --font-size-lg: 24px;
+    }
+}
+
+html {
+    background: var(--black);
+    font-weight: 400;
+    font-family: var(--font-atkinson), sans-serif;
+}
+
+
+@layer base {
+    .grid-container {
+        @apply grid grid-cols-12
+    }
+
+    .title-1 {
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: var(--font-size-md);
+    }
+}

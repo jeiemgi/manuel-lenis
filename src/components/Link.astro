@@ -1,0 +1,68 @@
+---
+interface Props {
+  to: string;
+  class?: string;
+  color?: "red" | "black";
+}
+
+const { to, class: className, color = "red" } = Astro.props as Props;
+
+const pathname = new URL(Astro.request.url).pathname;
+
+console.log(to, pathname, pathname === to);
+---
+
+<style>
+  .nav-link {
+    font-style: normal;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: var(--font-size-md);
+    transition: color 0.2s ease-in-out;
+    position: relative;
+    padding: 4px 8px;
+  }
+
+  .nav-link:before {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .nav-link:hover {
+    text-decoration: none;
+  }
+
+  .nav-link,
+  .nav-link:visited {
+    color: var(--red);
+  }
+
+  .nav-link.red {
+    color: var(--red);
+  }
+
+  .nav-link.black {
+    color: var(--black);
+  }
+
+  .nav-link.active,
+  .nav-link:hover {
+    &:before {
+      transform: scaleX(1);
+    }
+  }
+</style>
+
+<a href={to} class:list={[className, color, pathname === to ? "active" : ""]}>
+  <slot />
+</a>

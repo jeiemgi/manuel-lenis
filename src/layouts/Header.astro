@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import Link from "../components/Link.astro";
 import lenisLogo from "../assets/lenis-logo.png";
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 }
 
 const { isRed } = Astro.props;
+const linkColor = isRed ? "black" : "red";
 ---
 
 <style>
@@ -30,42 +32,14 @@ const { isRed } = Astro.props;
     justify-content: center;
   }
 
-  .nav {
-    padding: 0 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .nav ul {
+  .header nav ul {
     gap: 10rem;
     display: flex;
     list-style: none;
     padding: 0;
   }
 
-  .nav ul li a {
-    font-style: normal;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: var(--font-size-md);
-    transition: color 0.2s ease-in-out;
-  }
-
-  .nav ul li a:hover {
-    text-decoration: underline;
-  }
-
-  .header .nav ul li a {
-    color: var(--red);
-  }
-
   .header--red .header-logo {
-    color: var(--black);
-  }
-
-  .header--red .nav ul li a {
     color: var(--black);
   }
 
@@ -81,9 +55,15 @@ const { isRed } = Astro.props;
   </a>
   <nav class={"nav"}>
     <ul>
-      <li><a href="/about">About</a></li>
-      <li><a href="/reel">Reel</a></li>
-      <li><a href="/contact">Contact</a></li>
+      <li>
+        <Link color={linkColor} class="nav-link" to="/about">About</Link>
+      </li>
+      <li>
+        <Link color={linkColor} class="nav-link" to="/reel">Reel</Link>
+      </li>
+      <li>
+        <Link color={linkColor} class="nav-link" to="/contact">Contact</Link>
+      </li>
     </ul>
   </nav>
 </header>

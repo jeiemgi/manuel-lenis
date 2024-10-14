@@ -1,35 +1,45 @@
 ---
 import "@fontsource/atkinson-hyperlegible/400.css";
 import "@fontsource/atkinson-hyperlegible/700.css";
-import { ViewTransitions } from "astro:transitions";
+import "../styles/base.css";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
 import Cursor from "./Cursor.astro";
+import { ViewTransitions } from "astro:transitions";
 
 interface Props {
-  title: string;
+  title?: string;
   isRed?: boolean;
 }
 
-const { title, isRed } = Astro.props;
+const defaultTitle = "Manuel Lenis - Colombian filmmaker";
+
+const { title = defaultTitle, isRed } = Astro.props;
 ---
 
-<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" type="text/css" href="/styles/reset.css" />
-    <link rel="stylesheet" type="text/css" href="/styles/globals.css" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <ViewTransitions />
+    <style>
+      #main-container {
+        width: 100%;
+        min-height: 100vh;
+      }
+
+      #main-container.content--red {
+        background: var(--red);
+      }
+    </style>
   </head>
   <body>
     <Header isRed={isRed} />
-    <main id="main-layout" class:list={[{ "content--red": isRed }]}>
+    <main id="main-container" class:list={[{ "content--red": isRed }]}>
       <slot />
     </main>
     <Footer isRed={isRed} />
