@@ -2,7 +2,6 @@ class Cursor {
   x: number = 0;
   y: number = 0;
   cursorEl: HTMLDivElement;
-  cursorImg: HTMLImageElement;
   hoverEls: HTMLElement[] = [];
 
   constructor(selector: string) {
@@ -10,12 +9,9 @@ class Cursor {
     const cursorImg = cursorEl?.querySelector("img");
 
     if (!cursorEl) throw new Error("Cursor element not found");
-    if (!cursorImg) throw new Error("Cursor Image not found");
 
     this.cursorEl = cursorEl;
-    this.cursorImg = cursorImg;
 
-    document.querySelector("body")?.classList.add("custom-cursor");
     document.addEventListener("mousemove", this.onMouseMove);
 
     const hoverEls = document.querySelectorAll<HTMLElement>("[data-hover]");

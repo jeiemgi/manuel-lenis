@@ -1,15 +1,10 @@
 ---
 interface Props {
   to: string;
-  class?: string;
   color?: "red" | "black";
 }
-
-const { to, class: className, color = "red" } = Astro.props as Props;
-
+const { to, color = "red" } = Astro.props as Props;
 const pathname = new URL(Astro.request.url).pathname;
-
-console.log(to, pathname, pathname === to);
 ---
 
 <style>

@@ -1,21 +1,29 @@
 ---
 import "@fontsource/atkinson-hyperlegible/400.css";
 import "@fontsource/atkinson-hyperlegible/700.css";
-import "../styles/base.css";
-import Header from "./Header.astro";
-import Footer from "./Footer.astro";
-import { Image } from "astro:assets";
+import "@/styles/base.css";
+
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Cursor from "@/components/Cursor.astro";
+
 import { ViewTransitions } from "astro:transitions";
-import cursorPNG from "../assets/cursor.png";
+import { getImage } from "astro:assets";
 
 interface Props {
   title?: string;
   isRed?: boolean;
 }
 
-const defaultTitle = "Manuel Lenis - Colombian filmmaker";
+const defaultTitle = "Manuel Lenis - Film Director / Photographer";
 
 const { title = defaultTitle, isRed } = Astro.props;
+
+import about1 from "../assets/about-1.png";
+import about2 from "../assets/about-2.png";
+
+const aboutImage1 = await getImage({ src: about1, format: "webp" });
+const aboutImage2 = await getImage({ src: about2, format: "webp" });
 ---
 
 <html lang="en">
@@ -24,17 +32,19 @@ const { title = defaultTitle, isRed } = Astro.props;
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href={aboutImage1.src} as="image" />
+    <link rel="preload" href={aboutImage2.src} as="image" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <ViewTransitions />
     <style is:global>
+      a,
+      a:hover {
+        cursor: none !important;
+      }
+
       body {
         cursor: none !important;
-
-        a,
-        a:hover {
-          cursor: none !important;
-        }
       }
 
       body.content--red {
@@ -46,51 +56,6 @@ const { title = defaultTitle, isRed } = Astro.props;
         min-height: 100vh;
         cursor: none !important;
       }
-
-      #cursor {
-        z-index: 999;
-        position: fixed;
-        pointer-events: none;
-        transform: translate(-10%, -10%);
-      }
-
-      #cursor:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 50px;
-        height: 50px;
-        background: var(--red);
-        transform: translate(-40%, -40%) scale(0);
-        border-radius: 100%;
-        opacity: 0.5;
-        transition: transform 0.1s ease-out;
-      }
-
-      body.content--red #cursor:before {
-        background: var(--black);
-      }
-
-      #cursor.hovering:before {
-        transform: translate(-40%, -40%) scale(1);
-        transition: transform 0.2s ease-out;
-      }
-
-      #cursor.hovering img {
-        transform: scale(0);
-      }
-
-      #cursor img {
-        width: 28px;
-        height: 33px;
-        pointer-events: none;
-        transition: transform 0.2s ease-out;
-      }
-
-      body.content--red #cursor img {
-        filter: brightness(0);
-      }
     </style>
   </head>
   <body class:list={[{ "content--red": isRed }]}>
@@ -99,27 +64,9 @@ const { title = defaultTitle, isRed } = Astro.props;
       <slot />
     </main>
     <Footer isRed={isRed} />
-    <div id={"cursor"}>
-      <Image src={cursorPNG} alt="cursor" />
-    </div>
+    <Cursor />
     <script>
-      import Cursor from "../scripts/Cursor";
-
-      function init() {
-        const cursor = new Cursor("#cursor");
-
-        document.addEventListener(
-          "astro:before-swap",
-          () => {
-            console.log("destroy");
-            cursor.destroy();
-          },
-          { once: true },
-        );
-      }
-
-      document.addEventListener("astro:after-swap", init);
-      init();
+      import "../scripts/App";
     </script>
   </body>
 </html>
