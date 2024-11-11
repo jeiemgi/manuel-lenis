@@ -8,7 +8,6 @@ import Footer from "@/components/Footer.astro";
 import Cursor from "@/components/Cursor.astro";
 
 import { ViewTransitions } from "astro:transitions";
-import { getImage } from "astro:assets";
 
 interface Props {
   title?: string;
@@ -18,12 +17,6 @@ interface Props {
 const defaultTitle = "Manuel Lenis - Film Director / Photographer";
 
 const { title = defaultTitle, isRed } = Astro.props;
-
-import about1 from "../assets/about-1.png";
-import about2 from "../assets/about-2.png";
-
-const aboutImage1 = await getImage({ src: about1, format: "webp" });
-const aboutImage2 = await getImage({ src: about2, format: "webp" });
 ---
 
 <html lang="en">
@@ -32,34 +25,17 @@ const aboutImage2 = await getImage({ src: about2, format: "webp" });
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preload" href={aboutImage1.src} as="image" />
-    <link rel="preload" href={aboutImage2.src} as="image" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
     <ViewTransitions />
+    <title>{title}</title>
     <style is:global>
-      a,
-      a:hover {
-        cursor: none !important;
-      }
-
-      body {
-        cursor: none !important;
-      }
-
       body.content--red {
         background: var(--red);
-      }
-
-      #main-container {
-        width: 100%;
-        min-height: 100vh;
-        cursor: none !important;
       }
     </style>
   </head>
   <body class:list={[{ "content--red": isRed }]}>
-    <Header isRed={isRed} />
+    <Header />
     <main id="main-container" class:list={[{ "content--red": isRed }]}>
       <slot />
     </main>

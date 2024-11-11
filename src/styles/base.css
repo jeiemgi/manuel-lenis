@@ -76,6 +76,58 @@ html {
             font-weight: 700;
         }
     }
+}
 
+@layer base {
+    .nav-link {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        padding: 16px 20px;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: var(--font-size-md);
+    }
 
+    .nav-link {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        padding: 16px 20px;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: var(--font-size-md);
+    }
+
+    .nav-link:before {
+        content: "";
+        display: block;
+        width: 12px;
+        height: 4px;
+        border-radius: 10px;
+        position: absolute;
+        bottom: 0;
+        background-color: currentColor;
+        transform-origin: center;
+
+        transform: scaleX(0);
+        transition: transform 1s ease-in-out;
+    }
+
+    .nav-link,
+    .nav-link:visited {
+        color: currentColor;
+    }
+
+    .nav-link.active {
+        &:before {
+            transform: scaleX(1);
+        }
+    }
+
+    @media (min-width: 768px) {
+        .nav-link:hover {
+            text-decoration: none;
+        }
+    }
 }

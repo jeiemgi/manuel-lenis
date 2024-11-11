@@ -1,71 +1,17 @@
 ---
 interface Props {
-  to: string;
-  color?: "red" | "black";
+  href: string;
+  className?: string;
 }
-const { to, color = "red" } = Astro.props as Props;
+
+const { href, className } = Astro.props as Props;
 const pathname = new URL(Astro.request.url).pathname;
 ---
 
-<style>
-  .nav-link {
-    font-style: normal;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: var(--font-size-md);
-    transition: color 0.2s ease-in-out;
-    position: relative;
-    padding: 16px 20px;
-  }
-
-  .nav-link:before {
-    content: "";
-    display: block;
-    height: 5px;
-    border-radius: 5px;
-    width: 20px;
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    background-color: currentColor;
-    transform: scaleX(0);
-    transform-origin: center;
-    transition: transform 0.2s ease-in-out;
-  }
-
-  .nav-link,
-  .nav-link:visited {
-    color: var(--red);
-  }
-
-  .nav-link.red {
-    color: var(--red);
-  }
-
-  .nav-link.black {
-    color: var(--black);
-  }
-
-  .nav-link.active {
-    &:before {
-      transform: scaleX(1);
-    }
-  }
-
-  @media (min-width: 768px) {
-    .nav-link:hover {
-      text-decoration: none;
-    }
-  }
-</style>
-
 <a
-  href={to}
   data-hover
-  class:list={["nav-link", color, pathname === to ? "active" : ""]}
+  href={href}
+  class:list={["nav-link", { active: pathname === href }, className]}
 >
   <slot />
 </a>

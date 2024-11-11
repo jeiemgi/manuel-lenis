@@ -1,34 +1,3 @@
----
-
----
-
-<style>
-  #cursor {
-    z-index: 999;
-    position: fixed;
-    pointer-events: none;
-    width: 20px;
-    height: 20px;
-    background: var(--red);
-    border-radius: 100%;
-    transform: translate(-50%, -50%) scale(1);
-    transition:
-      transform 0.1s ease-in-out,
-      background 0.2s ease-out;
-    opacity: 1;
-  }
-
-  #cursor.hovering {
-    opacity: 0.3;
-    transform: translate(-50%, -50%) scale(2);
-    transition:
-      transform 0.1s ease-in-out,
-      background 0.2s ease-out;
-  }
-
-  body.content--red #cursor {
-    background: var(--black);
-  }
-</style>
-
-<div id={"cursor"}></div>
+<div class="fixed inset-0 z-10 w-full h-full pointer-events-none">
+  <div id={"cursor"}></div>
+</div>

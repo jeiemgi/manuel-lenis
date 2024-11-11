@@ -1,9 +1,10 @@
-import Cursor from "./Cursor";
+// import Cursor from "./Cursor";
+import Header from "./Header";
 
-let cursor: Cursor;
+// let cursor: Cursor;
 
 export const init = () => {
-  cursor = new Cursor("#cursor");
+  Header.init();
 
   document.addEventListener(
     "astro:before-swap",
@@ -15,7 +16,8 @@ export const init = () => {
 };
 
 export const destroy = () => {
-  cursor.destroy();
+  // cursor.destroy();
+  Header.destroy();
 };
 
 document.addEventListener("astro:after-swap", init);
