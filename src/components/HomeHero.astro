@@ -9,25 +9,30 @@ import reelPreview from "@/assets/hero-preview.mp4";
 </style>
 
 <div class={"hero h-screen flex"}>
-  <div class="hero-video opacity-0 absolute w-full h-full left-0 top-0">
+  <div class="hero-video absolute w-full h-full left-0 top-0">
     <video
       muted
       loop
       autoplay
       src={reelPreview}
+      id="hero-video"
       class="w-full h-full object-cover"></video>
   </div>
   <div class="absolute w-full h-full grid-container items-center justify-end">
     <div class={"col-span-2 col-start-10 text-right"}>
-      <h3>“IN THE SHADOWS, THE LIGHT FINDS ITS TRUEST EXPRESSION”.</h3>
+      <h3 class="hero-quote">
+        “IN THE SHADOWS, THE LIGHT FINDS ITS TRUEST EXPRESSION”.
+      </h3>
     </div>
   </div>
 
   <div class="grid-container absolute w-full bottom-[200px]">
     <div class="col-span-6 col-start-2 flex gap-x-5 text-red items-center">
-      <h1 class="heading-1">MANUELENIS</h1>
-      <span class="text-caption">—</span>
-      <span class="text-caption"> film director / photographer.</span>
+      <h1 class="heading-1 hero-content-element">MANUELENIS</h1>
+      <span class="text-caption hero-content-element">—</span>
+      <span class="text-caption hero-content-element">
+        film director / photographer.</span
+      >
     </div>
   </div>
 </div>

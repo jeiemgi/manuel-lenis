@@ -1,10 +1,9 @@
-// import Cursor from "./Cursor";
 import Header from "./Header";
-
-// let cursor: Cursor;
+import HeroVideo from "./HeroVideo";
 
 export const init = () => {
   Header.init();
+  HeroVideo.init();
 
   document.addEventListener(
     "astro:before-swap",
@@ -16,8 +15,8 @@ export const init = () => {
 };
 
 export const destroy = () => {
-  // cursor.destroy();
   Header.destroy();
+  HeroVideo.destroy();
 };
 
 document.addEventListener("astro:after-swap", init);

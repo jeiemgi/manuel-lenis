@@ -3,39 +3,31 @@ import gsap from "gsap";
 let menuMobile: HTMLDivElement | null;
 let menuBtn: HTMLButtonElement | null;
 let menuClose: HTMLButtonElement | null;
+let navLinks: NodeListOf<HTMLAnchorElement> | null;
 let mobileLinks: NodeListOf<HTMLAnchorElement> | null;
 
 const Header = {
   showMenu: () => {
     if (!menuMobile || !mobileLinks) return;
-
     menuMobile.dataset.isOpen = "true";
-    gsap.to(mobileLinks, {
-      y: 0,
-      opacity: 1,
-      stagger: 0.05,
-      duration: 0.5,
-      ease: "expo.out",
-    });
-
     gsap.to(menuMobile, {
       opacity: 1,
       duration: 0.5,
       ease: "expo.out",
       pointerEvents: "auto",
     });
+    gsap.from(mobileLinks, {
+      y: 25,
+      opacity: 0,
+      stagger: 0.05,
+      duration: 0.5,
+      ease: "expo.out",
+    });
   },
-
   hideMenu: () => {
     if (!menuMobile || !mobileLinks) return;
 
     menuMobile.dataset.isOpen = "false";
-    gsap.to(mobileLinks, {
-      y: 10,
-      opacity: 0,
-      ease: "expo.out",
-    });
-
     gsap.to(menuMobile, {
       opacity: 0,
       duration: 0.5,
@@ -43,6 +35,7 @@ const Header = {
       pointerEvents: "none",
     });
   },
+
   toggleMenu: () => {
     console.log("Header toggle");
     const isOpen = menuMobile?.dataset.isOpen;
@@ -52,6 +45,7 @@ const Header = {
       Header.showMenu();
     }
   },
+
   init: () => {
     menuMobile = document.querySelector("#mobile-menu");
     menuBtn = document.querySelector("#mobile-menu-btn");

@@ -11,7 +11,7 @@ const pathname = new URL(Astro.request.url).pathname;
 <a
   data-hover
   href={href}
-  class:list={["nav-link", { active: pathname === href }, className]}
+  class:list={[{ active: pathname === href }, className]}
 >
   <slot />
 </a>
