@@ -17,10 +17,10 @@ const Header = {
       pointerEvents: "auto",
     });
     gsap.from(mobileLinks, {
-      y: 25,
+      y: 10,
       opacity: 0,
       stagger: 0.05,
-      duration: 0.5,
+      duration: 1,
       ease: "expo.out",
     });
   },
