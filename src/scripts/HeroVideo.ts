@@ -2,8 +2,6 @@ import gsap from "gsap";
 
 const init = () => {
   if (window.location.pathname !== "/") return;
-
-  console.log("Hero video init");
   const heroVideo = document.querySelector("#hero-video");
   const elements = document.querySelectorAll(".hero-content-element");
   const quote = document.querySelectorAll(".hero-quote");
@@ -25,11 +23,11 @@ const init = () => {
   );
 
   timeline.from(
-    elements,
+    [elements, header, footer],
     {
       opacity: 0,
       duration: 2,
-      ease: "expo.out",
+      ease: "power2.inOut",
     },
     1.5,
   );
@@ -39,19 +37,9 @@ const init = () => {
     {
       opacity: 0,
       duration: 1,
-      ease: "power2.in",
+      ease: "power2.inOut",
     },
-    2,
-  );
-
-  timeline.from(
-    [header, footer],
-    {
-      opacity: 0,
-      duration: 0.5,
-      ease: "power2.in",
-    },
-    2,
+    1.5,
   );
 
   timeline.play();

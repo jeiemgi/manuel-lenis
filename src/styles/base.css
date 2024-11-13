@@ -4,7 +4,7 @@
 
 :root {
     --mobile-breakpoint: 768px;
-
+    /* Colors */
     --red: #c92624;
     --black: #13151a;
     /* Fonts */
@@ -26,20 +26,57 @@
     }
 }
 
+body.content--red {
+    background: var(--red);
+}
+
+body.content--red header {
+    color: var(--black);
+}
+
+body.content--red .header-logo {
+    color: var(--black);
+}
+
+body.content--red .header-logo-image {
+    filter: brightness(0);
+    transition: filter 0.2s ease-in-out;
+}
+
+footer {
+    color: var(--red);
+
+    a:visited {
+        color: var(--red);
+    }
+}
+
+body.content--red footer {
+    color: var(--black);
+
+    a:visited {
+        color: var(--black);
+    }
+}
+
+#cursor {
+    background: var(--red);
+}
+
+body.content--red #cursor {
+    background: var(--black);
+}
+
 html {
     background: var(--black);
     font-family: var(--font-atkinson), sans-serif;
 }
 
-
 @layer base {
     .grid-container {
-        @apply grid grid-cols-12 w-full gap-x-5
+        @apply grid grid-cols-6 md:grid-cols-12 w-full gap-x-5
     }
 
-    .grid-container {
-        @apply grid grid-cols-12 gap-5
-    }
 
     .heading-1, h1 {
         font-weight: 700;
@@ -79,21 +116,9 @@ html {
 }
 
 @layer base {
-    body.content--red header {
-        color: var(--black);
-    }
-
-    body.content--red .header-logo {
-        color: var(--black);
-    }
-
-    body.content--red .header-logo-image {
-        filter: brightness(0);
-        transition: filter 0.2s ease-in-out;
-    }
-
     .mobile-nav-link,
     .nav-link {
+        cursor: pointer;
         display: flex;
         justify-content: center;
         position: relative;
@@ -103,29 +128,18 @@ html {
         font-size: var(--font-size-md);
     }
 
-    .mobile-nav-link
-    .nav-link {
-        display: flex;
-        justify-content: center;
-        position: relative;
-        padding: 16px 20px;
-        font-weight: 700;
-        text-transform: uppercase;
-        font-size: var(--font-size-md);
-    }
 
-    .mobile-nav-link
-    .nav-link:before {
+    .mobile-nav-link::before,
+    .nav-link::before {
         content: "";
         display: block;
-        width: 12px;
-        height: 4px;
-        border-radius: 10px;
+        width: 8px;
+        height: 8px;
+        border-radius: 5px;
         position: absolute;
-        bottom: 0;
+        bottom: 5px;
         background-color: currentColor;
         transform-origin: center;
-
         transform: scaleX(0);
         transition: transform 1s ease-in-out;
     }
@@ -137,7 +151,7 @@ html {
         color: currentColor;
     }
 
-    .mobile-nav-link,
+    .mobile-nav-link.active,
     .nav-link.active {
         &:before {
             transform: scaleX(1);

@@ -1,9 +1,29 @@
+import Cursor from "./Cursor";
 import Header from "./Header";
 import HeroVideo from "./HeroVideo";
+import Reel from "./Reel";
+
+export const destroy = () => {
+  Cursor.destroy();
+  Header.destroy();
+  HeroVideo.destroy();
+  Reel.destroy();
+};
 
 export const init = () => {
+  const pathName = window.location.pathname;
+
+  Cursor.init();
   Header.init();
-  HeroVideo.init();
+
+  switch (pathName) {
+    case "/":
+      HeroVideo.init();
+      break;
+    case "/reel":
+      Reel.init();
+      break;
+  }
 
   document.addEventListener(
     "astro:before-swap",
@@ -12,11 +32,6 @@ export const init = () => {
     },
     { once: true },
   );
-};
-
-export const destroy = () => {
-  Header.destroy();
-  HeroVideo.destroy();
 };
 
 document.addEventListener("astro:after-swap", init);

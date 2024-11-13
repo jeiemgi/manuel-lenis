@@ -14,32 +14,30 @@ interface Props {
   isRed?: boolean;
 }
 
-const defaultTitle = "Manuel Lenis - Film Director / Photographer";
+const { title: titleProp, isRed } = Astro.props;
 
-const { title = defaultTitle, isRed } = Astro.props;
+const defaultTitle = "Manuel Lenis";
+const defaultTitle2 = titleProp ? titleProp : "Film Director / Photographer";
+const defaultDescription = "Colombian-born film director and photographer";
+const title = `${defaultTitle} - ${defaultTitle2}`;
 ---
 
 <html lang="en">
-  <head>
+  <head transition:animate="none">
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <title>{title}</title>
+    <meta name="description" content={defaultDescription} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <ViewTransitions />
-    <title>{title}</title>
-    <style is:global>
-      body.content--red {
-        background: var(--red);
-      }
-    </style>
   </head>
   <body class:list={[{ "content--red": isRed }]}>
     <Header />
     <main id="main-container" class:list={[{ "content--red": isRed }]}>
       <slot />
     </main>
-    <Footer isRed={isRed} />
+    <Footer />
     <Cursor />
     <script>
       import "../scripts/App";

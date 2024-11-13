@@ -1,48 +1,86 @@
+import gsap from "gsap";
+
 class Cursor {
   x: number = 0;
   y: number = 0;
-  cursorEl: HTMLDivElement;
+
+  cursorEl: HTMLDivElement | null = null;
+  isInitialized = false;
   hoverEls: HTMLElement[] = [];
+  quickToX: gsap.QuickToFunc | null = null;
+  quickToY: gsap.QuickToFunc | null = null;
 
-  constructor(selector: string) {
-    const cursorEl = document.querySelector<HTMLDivElement>(selector);
-    if (!cursorEl) throw new Error("Cursor element not found");
+  constructor() {
+    console.log("Cursor");
+    console.log(this.x, this.y);
+    this.cursorEl = document.querySelector("#cursor");
+    this.quickToX = gsap.quickTo("#cursor", "x", {
+      duration: 0.4,
+      ease: "power3",
+    });
+    this.quickToY = gsap.quickTo("#cursor", "y", {
+      duration: 0.4,
+      ease: "power3",
+    });
+    this.mouseMove();
+  }
 
-    this.cursorEl = cursorEl;
-
-    this.moveMouse();
+  init() {
     this.hoverElements();
   }
 
   onMouseMove = (e: MouseEvent) => {
+    console.log("onMouseMove");
+    if (!this.quickToX || !this.quickToY) return;
+
+    if (!this.isInitialized) {
+      gsap.to(this.cursorEl, { opacity: 0.5, duration: 0.5 });
+      this.quickToX(this.x, this.x);
+      this.quickToY(this.y, this.y);
+      this.isInitialized = true;
+      return;
+    }
+
     this.x = e.clientX;
     this.y = e.clientY;
-    this.cursorEl.style.left = `${e.clientX}px`;
-    this.cursorEl.style.top = `${e.clientY}px`;
+    this.quickToX(this.x);
+    this.quickToY(this.y);
   };
 
-  moveMouse = () => {
+  mouseMove = () => {
     document.addEventListener("mousemove", this.onMouseMove);
   };
 
-  onHoverIn = (e: MouseEvent, el: HTMLElement) => {
-    this.cursorEl.classList.add("hovering");
+  onHoverIn = (e: MouseEvent) => {
+    gsap.to(this.cursorEl, {
+      scale: 2,
+      opacity: 0.5,
+      duration: 0.2,
+      ease: "power3.out",
+    });
   };
 
-  onHoverOut = (e: MouseEvent, el: HTMLElement) => {
-    this.cursorEl.classList.remove("hovering");
+  onHoverOut = () => {
+    gsap.to(this.cursorEl, {
+      scale: 1,
+      opacity: 1,
+      duration: 0.2,
+      ease: "power3.out",
+    });
   };
 
   hoverElements = () => {
-    const hoverEls = document.querySelectorAll<HTMLElement>("[data-hover]");
+    const hoverEls = [
+      ...document.querySelectorAll<HTMLElement>("[data-hover]"),
+    ].filter((el) => el.dataset.hover === "true");
+
     hoverEls.forEach((el: HTMLElement) => {
-      el.addEventListener("mouseover", (e) => this.onHoverIn(e, el));
-      el.addEventListener("mouseout", (e) => this.onHoverOut(e, el));
+      el.addEventListener("mouseover", this.onHoverIn);
+      el.addEventListener("mouseout", this.onHoverOut);
     });
   };
 
   destroy() {
-    document.removeEventListener("mousemove", this.onMouseMove);
     this.hoverEls.forEach((el: HTMLElement) => {
       el.removeEventListener("mouseover", this.onHoverIn);
       el.removeEventListener("mouseout", this.onHoverOut);
@@ -50,4 +88,4 @@ class Cursor {
   }
 }
 
-export default Cursor;
+export default new Cursor();

@@ -1,16 +1,15 @@
 import gsap from "gsap";
 
-let menuMobile: HTMLDivElement | null;
-let menuBtn: HTMLButtonElement | null;
-let menuClose: HTMLButtonElement | null;
-let navLinks: NodeListOf<HTMLAnchorElement> | null;
+let mobileMenu: HTMLDivElement | null;
+let mobileOpen: HTMLButtonElement | null;
+let mobileClose: HTMLButtonElement | null;
 let mobileLinks: NodeListOf<HTMLAnchorElement> | null;
 
 const Header = {
   showMenu: () => {
-    if (!menuMobile || !mobileLinks) return;
-    menuMobile.dataset.isOpen = "true";
-    gsap.to(menuMobile, {
+    if (!mobileMenu || !mobileLinks) return;
+    mobileMenu.dataset.isOpen = "true";
+    gsap.to(mobileMenu, {
       opacity: 1,
       duration: 0.5,
       ease: "expo.out",
@@ -25,10 +24,10 @@ const Header = {
     });
   },
   hideMenu: () => {
-    if (!menuMobile || !mobileLinks) return;
+    if (!mobileMenu || !mobileLinks) return;
 
-    menuMobile.dataset.isOpen = "false";
-    gsap.to(menuMobile, {
+    mobileMenu.dataset.isOpen = "false";
+    gsap.to(mobileMenu, {
       opacity: 0,
       duration: 0.5,
       ease: "expo.out",
@@ -37,8 +36,7 @@ const Header = {
   },
 
   toggleMenu: () => {
-    console.log("Header toggle");
-    const isOpen = menuMobile?.dataset.isOpen;
+    const isOpen = mobileMenu?.dataset.isOpen;
     if (isOpen === "true") {
       Header.hideMenu();
     } else {
@@ -47,26 +45,25 @@ const Header = {
   },
 
   init: () => {
-    menuMobile = document.querySelector("#mobile-menu");
-    menuBtn = document.querySelector("#mobile-menu-btn");
-    menuClose = document.querySelector("#mobile-menu-close");
-    mobileLinks = menuMobile?.querySelectorAll(".mobile-nav-link") || null;
+    mobileMenu = document.querySelector("#mobile-menu");
+    mobileOpen = document.querySelector("#mobile-menu-btn");
+    mobileClose = document.querySelector("#mobile-menu-close");
+    mobileLinks = mobileMenu?.querySelectorAll(".mobile-nav-link") || null;
 
-    if (!menuMobile || !menuBtn || !menuClose || !mobileLinks) {
+    if (!mobileMenu || !mobileOpen || !mobileClose || !mobileLinks) {
       console.error("Header menu not found");
       return;
     }
 
-    gsap.set(menuMobile, { pointerEvents: "none" });
-    menuBtn.addEventListener("click", Header.toggleMenu);
-    menuClose.addEventListener("click", Header.toggleMenu);
+    gsap.set(mobileMenu, { pointerEvents: "none" });
+    mobileOpen.addEventListener("click", Header.toggleMenu);
+    mobileClose.addEventListener("click", Header.toggleMenu);
   },
   destroy: () => {
-    console.log("Header destroy");
-    const isOpen = menuMobile?.dataset.isOpen;
+    const isOpen = mobileMenu?.dataset.isOpen;
     if (isOpen === "true") Header.hideMenu();
-    menuBtn?.removeEventListener("click", Header.toggleMenu);
-    menuClose?.removeEventListener("click", Header.toggleMenu);
+    mobileOpen?.removeEventListener("click", Header.toggleMenu);
+    mobileClose?.removeEventListener("click", Header.toggleMenu);
   },
 };
 

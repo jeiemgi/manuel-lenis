@@ -7,19 +7,25 @@ import { Image } from "astro:assets";
 <header
   class="fixed top-10 left-0 w-full h-16 flex items-center md:justify-center justify-between z-10 text-primary px-10"
 >
-  <a id="header-logo" class="md:absolute left-20" href="/">
+  <a id="header-logo" class="md:absolute md:left-[8.6%]" href="/">
     <Image src={lenisLogo} class="header-logo-image" alt="Lenis logo" />
   </a>
   <nav id="desktop-nav" class="hidden md:flex">
     <ul class="flex gap-x-20">
-      <li class="flex">
-        <NavLink className="nav-link" href="/about">About</NavLink>
+      <li>
+        <NavLink dataHover="true" className="nav-link" href="/about"
+          >About
+        </NavLink>
       </li>
-      <li class="flex">
-        <NavLink className="nav-link" href="/reel">Reel</NavLink>
+      <li>
+        <NavLink dataHover="true" className="nav-link reel-open" href="/reel">
+          Reel
+        </NavLink>
       </li>
-      <li class="flex">
-        <NavLink className="nav-link" href="/contact">Contact</NavLink>
+      <li>
+        <NavLink dataHover="true" className="nav-link" href="/contact"
+          >Contact
+        </NavLink>
       </li>
     </ul>
   </nav>
@@ -48,10 +54,14 @@ import { Image } from "astro:assets";
           <NavLink className="mobile-nav-link" href="/about">About</NavLink>
         </li>
         <li>
-          <NavLink className="mobile-nav-link" href="/reel">Reel</NavLink>
+          <NavLink className="mobile-nav-link reel-open" href="/reel">
+            Reel
+          </NavLink>
         </li>
         <li>
-          <NavLink className="mobile-nav-link" href="/contact">Contact</NavLink>
+          <NavLink className="mobile-nav-link" href="mailto:hola@manuelenis.com"
+            >Contact
+          </NavLink>
         </li>
       </ul>
     </nav>
