@@ -11,8 +11,6 @@ class Cursor {
   quickToY: gsap.QuickToFunc | null = null;
 
   constructor() {
-    console.log("Cursor");
-    console.log(this.x, this.y);
     this.cursorEl = document.querySelector("#cursor");
     this.quickToX = gsap.quickTo("#cursor", "x", {
       duration: 0.4,
@@ -30,7 +28,6 @@ class Cursor {
   }
 
   onMouseMove = (e: MouseEvent) => {
-    console.log("onMouseMove");
     if (!this.quickToX || !this.quickToY) return;
 
     if (!this.isInitialized) {

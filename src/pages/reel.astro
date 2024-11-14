@@ -4,6 +4,7 @@ import Layout from "@/layouts/Layout.astro";
 
 <style>
   #reel-container {
+    height: 100%;
     position: relative;
     display: flex;
     align-items: center;
@@ -22,12 +23,12 @@ import Layout from "@/layouts/Layout.astro";
 <Layout title="Reel">
   <div
     id="reel-lightbox"
-    class="absolute bg-black inset-0 opacity-0 pointer-events-none size-full"
+    class="absolute bg-black inset-0 opacity-0 pointer-events-none py-32"
   >
-    <div class="grid-container h-full items-center justify-center">
-      <div class="col-span-6 md:col-start-2 md:col-span-10 px-10 md:px-0">
-        <div id="reel-container" class="aspect-video">
-          <span class="text-caption text-primary">Loading ...</span>
+    <div class="grid-container h-full items-center justify-center px-10">
+      <div class="col-span-6 md:col-start-2 md:col-span-10 md:px-0 h-full">
+        <div id="reel-container">
+          <span class="text-xs text-primary">Loading ...</span>
         </div>
       </div>
     </div>
